@@ -375,7 +375,7 @@ class TerminalGame:
                 stdscr.addstr(21, 0, self.terminal_status)
                 stdscr.addch('█', curses.A_BLINK | curses.color_pair(1))
                 # Publish Terminal status
-                mqttc.publish("terminal_status", "self.terminal_status")
+                mqttc.publish("terminal_status", self.terminal_status)
 
             # Refresh the screen
             stdscr.refresh()
