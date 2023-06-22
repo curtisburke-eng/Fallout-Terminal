@@ -10,6 +10,7 @@ import simpleaudio
 import os
 import sys
 from gpiozero import Button, DigitalOutputDevice
+import paho.mqtt.client as mqtt
 
 button_up = Button(20)
 button_down = Button(16)
@@ -373,6 +374,8 @@ class TerminalGame:
                 stdscr.addstr('Welcome to ROBCO Industries (TM) Termlink')
                 stdscr.addstr(21, 0, self.terminal_status)
                 stdscr.addch('█', curses.A_BLINK | curses.color_pair(1))
+                # Publish Terminal status
+                mqttc.publish("terminal_status", "self.terminal_status")
 
             # Refresh the screen
             stdscr.refresh()
@@ -396,11 +399,17 @@ class TerminalGame:
             #stdscr.nodelay(False)
 
     def main(self):
+        # Connect to MQTT Broker 
+        mqttc.connect("10.0.0.13", 1883, 60)
+        mqttc.loop_start()
+
         # Cleanly handle setup and close of curses within the shell
         curses.wrapper(self.draw_terminal)
 
-
+# Create a terminal instance
 terminal = TerminalGame()
+# Create a MQTT Client
+mqttc = mqtt.Client()
 
 if __name__ == "__main__":
 
