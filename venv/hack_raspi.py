@@ -21,7 +21,7 @@ trinket_trigger = DigitalOutputDevice(26)
 
 buttons = [button_up, button_down, button_left, button_right, button_enter, button_quit]
 
-os.chdir('/home/pi/Fallout_Terminal_Game/venv')
+os.chdir('/home/overseer/Projects/Fallout-Terminal/venv')
 
 sfx_good = simpleaudio.WaveObject.from_wave_file('passgood.wav')
 sfx_bad = simpleaudio.WaveObject.from_wave_file('passbad.wav')
@@ -346,10 +346,10 @@ class TerminalGame:
                 # Show hidden location/password data for debugging
                 #stdscr.addstr(1, 20, str(self.word_start_locations))
                 #stdscr.addstr(1, 40, 'likeness=' + str(self.likeness))
-                #stdscr.addstr(2, 40, self.password)
+                stdscr.addstr(2, 40, self.password)
                 #stdscr.addstr(3, 40, str(self.selection_index))
                 #stdscr.addstr(4, 40, str(self.get_cursor_pos_from_index(self.selection_index)))
-                #stdscr.addstr(5, 40, self.terminal_status)
+                stdscr.addstr(5, 40, self.terminal_status)
                 #stdscr.addstr(5, 40, str(self.highlightable_indices))
                 #stdscr.addstr(5, 40, str(self.bonus_indices))
 
